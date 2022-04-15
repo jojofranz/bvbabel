@@ -6,23 +6,23 @@ A lightweight Python library for reading & writing [BrainVoyager](https://www.br
 
 ### File format support overview
 
-| File format | Read  | Write | Create |
-| ------------|-------|-------|--------|
-| FMR & STC   | No    | No    | No     |
-| GLM         | No    | No    | No     |
-| GTC         | Yes   | Yes   | No     |
-| MTC         | No    | No    | No     |
-| OBJ         | No    | Yes   | No     |
-| POI         | No    | No    | No     |
-| PRT         | No    | No    | No     |
-| SMP         | Yes   | Yes   | Yes    |
-| SRF         | Yes   | No    | No     |
-| SSM         | Yes   | No    | No     |
-| SDM         | No    | No    | No     |
-| VMP         | Yes   | Yes   | No     |
-| VMR         | Yes   | Yes   | No     |
-| VOI         | Yes   | No    | No     |
-| VTC         | Yes   | Yes   | Yes    |
+| File format | Read | Write | Create |
+| ------------|------|-------|--------|
+| FMR & STC   | Yes  | No    | No     |
+| GLM         | No   | No    | No     |
+| GTC         | Yes  | Yes   | No     |
+| MTC         | No   | No    | No     |
+| OBJ         | No   | Yes   | No     |
+| POI         | No   | No    | No     |
+| PRT         | No   | No    | No     |
+| SMP         | Yes  | Yes   | Yes    |
+| SRF         | Yes  | No    | No     |
+| SSM         | Yes  | No    | No     |
+| SDM         | No   | No    | No     |
+| VMP         | Yes  | Yes   | No     |
+| VMR         | Yes  | Yes   | No     |
+| VOI         | Yes  | No    | No     |
+| VTC         | Yes  | Yes   | Yes    |
 
 ## Dependencies
 
@@ -43,7 +43,7 @@ cd /path/to/bvbabel
 ```
 python setup.py install
 ```
-4. Once the installation is complete, you can have a look ant try using some of the example scripts at the [examples](examples/) folder.
+4. Once the installation is complete, you can have a look and try using some of the example scripts at the [examples](examples/) folder.
 
 ## BrainVoyager documentation
 

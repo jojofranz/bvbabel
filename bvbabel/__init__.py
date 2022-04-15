@@ -1,5 +1,7 @@
 """For having the version."""
 
+import bvbabel.fmr
+import bvbabel.stc
 import bvbabel.vmr
 import bvbabel.vmp
 import bvbabel.vtc
@@ -10,5 +12,5 @@ import bvbabel.obj
 import bvbabel.voi
 import bvbabel.ssm
 
-import pkg_resources
-__version__ = pkg_resources.require("bvbabel")[0].version
+#import pkg_resources TODO
+#__version__ = pkg_resources.require("bvbabel")[0].version TODO

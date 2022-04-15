@@ -76,3 +76,63 @@ def read_voi(filename):
         d["Coordinates"] = np.asarray(d["Coordinates"])
 
     return header, data
+
+
+def voi_to_mask(voi, shape=None):
+    """Convert voi information into volume masks.
+
+    Parameters
+    ----------
+    voi : tuple
+        Voi information (voi_header, voi_data) as returned by read_voi.
+    shape : int or array-like
+        (Optional) Framing cube dimensions.
+
+    Returns
+    -------
+    voi_volumes : list
+        A list of with one dictionariy per VOI.
+        voi_volumes[voi_ix]['VOI'] contains the VOI volume.
+        voi_volumes[voi_ix]['NameOfVOI'] contains the name of the VOI.
+
+    Examples
+    --------
+    >>> voi_volumes = bvbabel.voi.voi_to_mask(bvbabel.voi.read_voi(filename))
+
+
+    """
+
+    voi_header, voi_data = voi
+
+    nr_voi = voi_header['NrOfVOIs']
+
+    if shape is None:
+        dims = np.repeat(voi_header["OriginalVMRFramingCubeDim"], 3)
+    else:
+        if isinstance(shape, int):
+            dims = np.repeat(shape, 3)
+        else:
+            dims = np.array(shape)
+
+    voi_volumes = []
+    for voi_i in range(nr_voi):
+        coord = voi_data[voi_i]['Coordinates']
+        coord = coord.T
+        # Note: is this different from the usual transpose used in bvbabel?
+        # which is: (0, 2, 1, 3))  # BV to Tal
+        coord = np.vstack([coord[2, :],  # BV to Tal
+                           coord[0, :],
+                           coord[1, :]])
+
+        coord = np.ravel_multi_index(coord, dims, order='C')
+
+        voi_vol = np.zeros(np.prod(dims), dtype=np.int8)
+        voi_vol[coord] = 1
+        voi_vol = np.reshape(voi_vol, dims)
+        voi_vol = voi_vol[::-1, ::-1, ::-1]  # Flip BV axes
+
+        voi_volumes.append({'VOI': voi_vol,
+                            'NameOfVOI': voi_data[voi_i]['NameOfVOI']})
+
+    return voi_volumes
+
